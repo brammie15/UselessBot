@@ -11,4 +11,13 @@
   "dependencies": {
     "discord.js": "^12.2.0"
   }
+  
+},
+{
+  "name": "request",
+  "version": "2.88.2"
+},
+{
+  "name": "cheerio",
+  "version": "0.22.0"
 }
