@@ -32,6 +32,7 @@ client.on("message",async message => {
             .addFields(
               { name: "!tmauf", value: "tell me a useless fact"},
               { name: "!tmtmofot", value: "tell the most useless fact of today"},
+              { name: "!ihrttpisf", value: "i have record that this person is simping for"},
               { name: "!ping", value: "i don't know what this does tbh"},
               { name: "!hmphgauf", value: "how many people have gotten a useless fact"},
               { name: "!nou", value: "no u, the perfect tool for uno"},
@@ -79,7 +80,10 @@ client.on("message",async message => {
             }
         });
 
+    }else if(command === `${prefix}ihrttpisf`){
+        message.channel.send("this person talked to me: "+message.member.id);
     }
+
 });
 
 
