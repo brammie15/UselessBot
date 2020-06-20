@@ -72,7 +72,7 @@ client.on('message', message => {
         if(!args[0]){
            return message.channel.send("i am gonna need a maxinum number.")
         }
-        message.channel.send(Math.ceil(random()*args[0]));
+        message.channel.send(Math.ceil(Math.random()*  parseFloat(args[0])));
     }
     
     
