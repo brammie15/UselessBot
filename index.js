@@ -94,7 +94,7 @@ client.on('message', message => {
        // message.channel.send(`First argument: ${args[0]}`);
     }
     else if(command === `spamAngel`){
-        for(let i = 0;i<100;i++){
+        for(let i = 0;i>100;i++){
             message.channel.send("SEND N00DS")
         }
     }
