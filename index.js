@@ -81,7 +81,7 @@ client.on("message",async message => {
         });
 
     }else if(command === `${prefix}ihrttpisf`){
-        message.channel.send("this person talked to me: "+message.member.id);
+        message.channel.send("this person talked to me: "+message.member.name);
     }
 
 });
