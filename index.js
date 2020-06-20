@@ -22,6 +22,7 @@ client.on('message', message => {
               { name: "!tmtmofut", value: "tell the most useless fact of today"},
               { name: "!ihrttpisf", value: "i have record that this person is simping for"},
               { name: "!ping", value: "i don't know what this does tbh"},
+              { name: "!gmarn", value: "give me a random number + max"},
               { name: "!hmphgauf", value: "how many people have gotten a useless fact"},
               { name: "!nou", value: "no u, the perfect tool for uno"},
             )
