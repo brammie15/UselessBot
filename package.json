@@ -1,7 +1,7 @@
 {
   "name": "uselessbot",
   "version": "1.0.0",
-  "description": "",
+  "description": "A useless bot for discord",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,8 +9,16 @@
   "author": "brammie15",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^12.2.0"
-  }
-
+    "discord.js": "^12.2.0",
+    "request": "^2.83.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brammie15/UselessBot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/brammie15/UselessBot/issues"
+  },
+  "homepage": "https://github.com/brammie15/UselessBot#readme"
 }
-
