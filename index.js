@@ -31,6 +31,7 @@ client.on("message",async message => {
             .setDescription("Useless Help")
             .addFields(
               { name: "!tmauf", value: "tell me a useless fact"},
+              { name: "!tmtmofot", value: "tell the most useless fact of today"},
               { name: "!ping", value: "i don't know what this does tbh"},
               { name: "!hmphgauf", value: "how many people have gotten a useless fact"},
               { name: "!nou", value: "no u, the perfect tool for uno"},
@@ -66,7 +67,7 @@ client.on("message",async message => {
         message.channel.send(Count +" people have recieved a useless fact.")
     }else if(command === `${prefix}hmphgauf`){
 
-    }else if(command === `${prefix}tmauf`){
+    }else if(command === `${prefix}tmtmofot`){
         request('https://uselessfacts.jsph.pl/today.json?language=en', (error,respone,body) =>{
             if(!error && respone.statusCode == 200){
                 var imported = JSON.parse(body);
