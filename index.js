@@ -68,7 +68,15 @@ client.on('message', message => {
             }
         });
 
-    }/*else if(command === `ihrttpisf`){
+    }else if(command === 'gmarn'){
+        if(!args[0]){
+           return message.channel.send("i am gonna need a maxinum number.")
+        }
+        message.channel.send(Math.ceil(random()*args[0]));
+    }
+    
+    
+    /*else if(command === `ihrttpisf`){
 
         //message.channel.send("this person talked to me: "+message.member.user);
         const user = message.author;
