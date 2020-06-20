@@ -66,6 +66,18 @@ client.on("message",async message => {
         message.channel.send(Count +" people have recieved a useless fact.")
     }else if(command === `${prefix}hmphgauf`){
 
+    }else if(command === `${prefix}tmauf`){
+        request('https://uselessfacts.jsph.pl/today.json?language=en', (error,respone,body) =>{
+            if(!error && respone.statusCode == 200){
+                var imported = JSON.parse(body);
+                var uselessFactToday = imported['text'];
+                Count ++;
+                message.channel.send("here is the most useless fact of today " + uselessFactToday)
+                
+                
+            }
+        });
+
     }
 });
 
