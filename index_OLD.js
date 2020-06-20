@@ -109,7 +109,7 @@ client.on("message",async message => {
 
 
 
-client.login("NzA5OTIxNTIzNTIzMzg3NDAz.Xu08TQ.uGbTp2J0amSiAalzlTEJFnh-3bU");
+client.login("");
 
 /*
 ⠐⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠂
