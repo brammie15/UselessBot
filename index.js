@@ -24,6 +24,7 @@ client.on('message', message => {
               { name: "!ping", value: "i don't know what this does tbh"},
               { name: "!gmarn", value: "give me a random number + max"},
               { name: "!hmphgauf", value: "how many people have gotten an useless fact"},
+              { name: "!htcueodyfhdotey", value: "has the conceivable universe exploded or died of heat death or thermal expansion yet?"},
               { name: "!nou", value: "no u, the perfect tool for uno"},
             )
             .setTimestamp()
@@ -93,10 +94,10 @@ client.on('message', message => {
 
        // message.channel.send(`First argument: ${args[0]}`);
     }
-    else if(command === `spamAngel`){
-        for(let i = 0;i<100;i++){
-            message.channel.send("SEND N00DS")
-        }
+    else if(command === `htcueodyfhdotey`){
+       
+        message.channel.send("i dont know")
+        
     }
 	console.log(message.content);
 });
