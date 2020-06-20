@@ -10,7 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "discord.js": "^12.2.0",
-    "request": "^2.83.0"
+    "request": "^2.83.0",
+    "cheerio": "0.22.0"
   },
   "devDependencies": {},
   "repository": {
