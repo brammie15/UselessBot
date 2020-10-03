@@ -90,13 +90,29 @@ client.on('message', message => {
         message.channel.send(`Command name: ${command}\nArguments: ${args}`);
     
     }*/else if(command === `test`){
-       message.channel.send("pls beg");
+        if(message.member.user.tag == "brammie15#3455"){
+            channel = client.channels.cache.get('756815503925837933');
+            message.channel.send("bot is struggeling to start...");
+            var interval = setInterval (function () {
+                request('https://uselessfacts.jsph.pl/random.json/?language=en', (error,respone,body) =>{
+                    if(!error && respone.statusCode == 200){
+                    var imported = JSON.parse(body);
+                    var uselessFact = imported['text'];
+                    Count ++;
+                    message.channel.send("here is ur useless fact: " + uselessFact)
+                
+            }
+        });
+            }, 900000);
+        }else{
+            message.channel.send("u dont hav perms");
+        }
 
        // message.channel.send(`First argument: ${args[0]}`);
     }
-    else if(command === `htcueodyfhdotey`){
+    else if(command === "htcueodyfhdotey"){
        
-        message.channel.send("i dont know")
+        message.channel.send("i dont know");
         
     }
 	console.log(message.content);
@@ -107,4 +123,4 @@ client.once('ready', () => {
 	console.log('Ready!');
 });
 
-client.login(process.env.token);
+client.login("tokengoeshere");
