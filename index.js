@@ -8,21 +8,49 @@ const readline = require('readline');
 const rl = readline.createInterface({input : process.stdin,output : process.stdout});
 
 rl.on("line",(userInput)=>{
-    var debugChannel = client.channels.cache.get('762229279756779550');
-    debugChannel.send(userInput);
-});
+    var commands = processText(userInput);
+    if(commands[0] == "send"){
+        if(commands[2] == null){
+            console.log('please provide 2 args, the correct usage is : send "channelid" "message"');
+        }else{
+            try {
+                channel = client.channels.cache.get(commands[1]);
+                channel.send(commands[2]);
+
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    }else{
+        console.log("Command not recognized!")
+    }
+
+})
 var date_ob = new Date();
 var interval;
 var Count = 0;
 const { prefix } = require('./botconfig.json');
+const { token } = require('./botToken.json');
 const { userInfo } = require('os');
 //const { RSA_X931_PADDING } = require('constants');
+function processText(s){
+    var splittedText = s.split(/([^\s"]+|"[^"]*")+/g)
+    var output = [];
+    splittedText.forEach((i) => {
+        if(i == '' || i ==' '){
 
+        }else{
+        var quoteLess = i.replace(/"/g,'');
+        output.push(quoteLess);
+        }
+    });
+    return output;
+}
 client.on('message', message => {
     if (!message.content.startsWith(prefix) || message.author.bot) return;
     const args = message.content.slice(prefix.length).split(/ +/);
     const command = args.shift().toLowerCase();
-    
+
     if(command === `help`){
         var Help = new Discord.MessageEmbed()
             .setColor('#7FFF00')
@@ -42,7 +70,7 @@ client.on('message', message => {
             )
             .setTimestamp()
             .setFooter("useless footer");
-        
+
 
         message.channel.send(Help);
 
@@ -57,15 +85,15 @@ client.on('message', message => {
                 var uselessFact = imported['text'];
                 Count ++;
                 message.channel.send("here is ur useless fact: " + uselessFact)
-                
-                
+
+
             }
         });
 
     }else if(command === `shutdown`)
     {
         message.channel.send("ok cya!");
-        
+
         client.user.setPresence({status:"invisible"});
     }else if(command ===`nou`){
         //message.channel.send('⠐⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠂\n⠄⠄⣰⣾⣿⣿⣿⠿⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣆⠄⠄\n⠄⠄⣿⣿⣿⡿⠋⠄⡀⣿⣿⣿⣿⣿⣿⣿⣿⠿⠛⠋⣉⣉⣉⡉⠙⠻⣿⣿⠄⠄\n⠄⠄⣿⣿⣿⣇⠔⠈⣿⣿⣿⣿⣿⡿⠛⢉⣤⣶⣾⣿⣿⣿⣿⣿⣿⣦⡀⠹⠄⠄\n⠄⠄⣿⣿⠃⠄⢠⣾⣿⣿⣿⠟⢁⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡄⠄⠄\n⠄⠄⣿⣿⣿⣿⣿⣿⣿⠟⢁⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠄⠄\n⠄⠄⣿⣿⣿⣿⣿⡟⠁⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠄⠄\n⠄⠄⣿⣿⣿⣿⠋⢠⣾⣿⣿⣿⣿⣿⣿⡿⠿⠿⠿⠿⣿⣿⣿⣿⣿⣿⣿⣿⠄⠄\n⠄⠄⣿⣿⡿⠁⣰⣿⣿⣿⣿⣿⣿⣿⣿⠗⠄⠄⠄⠄⣿⣿⣿⣿⣿⣿⣿⡟⠄⠄\n⠄⠄⣿⡿⠁⣼⣿⣿⣿⣿⣿⣿⡿⠋⠄⠄⠄⣠⣄⢰⣿⣿⣿⣿⣿⣿⣿⠃⠄⠄\n⠄⠄⡿⠁⣼⣿⣿⣿⣿⣿⣿⣿⡇⠄⢀⡴⠚⢿⣿⣿⣿⣿⣿⣿⣿⣿⡏⢠⠄⠄\n⠄⠄⠃⢰⣿⣿⣿⣿⣿⣿⡿⣿⣿⠴⠋⠄⠄⢸⣿⣿⣿⣿⣿⣿⣿⡟⢀⣾⠄⠄\n⠄⠄⢀⣿⣿⣿⣿⣿⣿⣿⠃⠈⠁⠄⠄⢀⣴⣿⣿⣿⣿⣿⣿⣿⡟⢀⣾⣿⠄⠄\n⠄⠄⢸⣿⣿⣿⣿⣿⣿⣿⠄⠄⠄⠄⢶⣿⣿⣿⣿⣿⣿⣿⣿⠏⢀⣾⣿⣿⠄⠄\n⠄⠄⣿⣿⣿⣿⣿⣿⣿⣷⣶⣶⣶⣶⣶⣿⣿⣿⣿⣿⣿⣿⠋⣠⣿⣿⣿⣿⠄⠄\n⠄⠄⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⢁⣼⣿⣿⣿⣿⣿⠄⠄\n⠄⠄⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⢁⣴⣿⣿⣿⣿⣿⣿⣿⠄⠄\n⠄⠄⠈⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⢁⣴⣿⣿⣿⣿⠗⠄⠄⣿⣿⠄⠄\n⠄⠄⣆⠈⠻⢿⣿⣿⣿⣿⣿⣿⠿⠛⣉⣤⣾⣿⣿⣿⣿⣿⣇⠠⠺⣷⣿⣿⠄⠄\n⠄⠄⣿⣿⣦⣄⣈⣉⣉⣉⣡⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⠉⠁⣀⣼⣿⣿⣿⠄⠄\n⠄⠄⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣶⣾⣿⣿⡿⠟⠄⠄\n⠠⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄.')
@@ -110,7 +138,7 @@ client.on('message', message => {
     else if(command === "htcueodyfhdotey"){
 
         message.channel.send("i dont know");
-        
+
     }else if(command === 'stopit'){
         if(message.member.user.tag == "brammie15#3455"){
             clearInterval(interval);
@@ -125,7 +153,7 @@ function testing(helo){
     channel.send(helo);
 }
 client.once('ready', () => {
-	console.log('Ready!');
+	//console.log('Ready!');
 });
 
-client.login("tokengoeshere");
+client.login(token);
